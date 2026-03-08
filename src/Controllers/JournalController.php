@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Controller;
 use App\Service\JournalsService;
 use App\Repository\journalsRepository;
+use App\Models\Journal;
 
 class JournalController extends Controller
 {
@@ -27,4 +28,23 @@ class JournalController extends Controller
         $journal = $this->_journalsService->get($id);
         $this->render('details', ['journals' => $journal]);
     }
+
+    public function edit()
+    {
+        $id = $_GET['id'];
+        $journal = $this->_journalsService->get($id);
+        $this->render('edit', ['journals' => $journal]);
+    }
+
+    public function update()
+{
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $date = $_POST['date'];
+
+    $journal = new Journal($id, $name, $date);
+    $this->_journalsService->save($journal);
+
+    header('Location: /journals');
+}
 }
