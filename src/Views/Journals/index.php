@@ -19,7 +19,7 @@
       <td><?= $journal->date ?></td>
       <td><a href="/journals/details?id=<?= $journal->id ?>" class="btn btn-primary btn-sm">Detail</a></td>
       <td><a href="/journals/edit?id=<?= $journal->id ?>" class="btn btn-primary btn-sm">Edit</a></td>
-
+      <td><a href="/journals/delete?id=<?= $journal->id ?>" class="btn btn-primary btn-sm">Delete</a></td>
     </tr>
      <?php endforeach; ?>
 

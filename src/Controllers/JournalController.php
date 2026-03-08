@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Controller;
@@ -37,14 +38,30 @@ class JournalController extends Controller
     }
 
     public function update()
-{
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $date = $_POST['date'];
+    {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $date = $_POST['date'];
 
-    $journal = new Journal($id, $name, $date);
-    $this->_journalsService->save($journal);
+        $journal = new Journal($id, $name, $date);
+        $this->_journalsService->save($journal);
 
-    header('Location: /journals');
-}
+        header('Location: /journals');
+    }
+
+    public function delete()
+    {
+        $id = $_GET['id'];
+        $journal = $this->_journalsService->get($id);
+        $this->render('delete', ['journals' => $journal]);
+        }
+
+
+    public function remove()
+    {
+        $id = $_POST['id'];
+        $journal = $this->_journalsService->delete($id);
+        header('Location: /journals');
+    }
+
 }
