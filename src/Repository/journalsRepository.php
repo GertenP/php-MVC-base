@@ -3,10 +3,10 @@
 namespace App\Repository;
 
 use App\Models\Journal;
-use IjournalsRepository;
+use App\Repository\IJournalsRepository;
 use PDO;
 
-class journalsRepository implements IjournalsRepository
+class journalsRepository implements IJournalsRepository
 {
 
     public $test_conn;

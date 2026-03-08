@@ -7,5 +7,3 @@ $router = new Router();
 $router->get('/', HomeController::class, 'index');
 
 $router->dispatch();
-
-require '../src/dbcon.php';
