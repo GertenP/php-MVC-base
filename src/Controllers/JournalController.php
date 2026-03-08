@@ -5,7 +5,7 @@ use App\Controller;
 use App\Service\JournalsService;
 use App\Repository\journalsRepository;
 
-class HomeController extends Controller
+class JournalController extends Controller
 {
     private JournalsService $_journalsService;
 
@@ -19,5 +19,12 @@ class HomeController extends Controller
     {
         $journals = $this->_journalsService->getAll();
         $this->render('index', ['journals' => $journals]);
+    }
+
+    public function details()
+    {
+        $id = $_GET['id'];
+        $journal = $this->_journalsService->get($id);
+        $this->render('details', ['journals' => $journal]);
     }
 }

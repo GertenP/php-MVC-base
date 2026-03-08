@@ -8,9 +8,7 @@ class Controller
     protected function render($view, $data = [])
     {
         extract($data);
-
-        include "Views/$view.php";
-        require_once __DIR__ . '/..'. '/src' .'/dbcon.php';
-
+        $model = array_keys($data)[0]; // modeli tüüp ja $view on siis vaade(index.php jne)
+        include "Views/$model/$view.php";
     }
 }

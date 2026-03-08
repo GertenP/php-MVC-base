@@ -1,9 +1,10 @@
 <?php
 
-use App\Controllers\HomeController;
+use App\Controllers\JournalController;
 use App\Router;
 
 $router = new Router();
-$router->get('/', HomeController::class, 'index');
+$router->get('/journals', JournalController::class, 'index');
+$router->get('/journals/details', JournalController::class, 'details');
 
 $router->dispatch();

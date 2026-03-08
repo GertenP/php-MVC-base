@@ -17,6 +17,7 @@
       <th scope="row"><?= $journal->id ?></th>
       <td><?= $journal->name ?></td>
       <td><?= $journal->date ?></td>
+      <td><a href="/journals/details?id=<?= $journal->id ?>" class="btn btn-primary btn-sm">Detail</a></td>
     </tr>
      <?php endforeach; ?>
 
