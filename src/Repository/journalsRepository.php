@@ -3,9 +3,10 @@
 namespace App\Repository;
 
 use App\Models\Journal;
+use IjournalsRepository;
 use PDO;
 
-class journalsRepository
+class journalsRepository implements IjournalsRepository
 {
 
     public $test_conn;
@@ -16,7 +17,7 @@ class journalsRepository
         $this->test_conn = $test_conn;
     }
 
-    function getAll()
+    function getAll(): array
     {
         $stmt = $this->test_conn->query("SELECT * FROM journals");
         $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -28,29 +29,28 @@ class journalsRepository
         return $journals;
     }
 
-    function add($journal)
+    function add(Journal $journal): void
     {
         $stmt = $this->test_conn->prepare("INSERT INTO journals (name, date) VALUES (':name', ':date')");
         $stmt->execute([':name' => $journal->name, ':date' => $journal->date]);
-        $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $rows;
     }
 
-    function get($id)
+    function get(int $id): Journal
     {
         $stmt = $this->test_conn->prepare("SELECT * FROM journals WHERE id = :id");
         $stmt->execute([':id' => $id]);
         $row = $stmt->fetch(PDO::FETCH_OBJ);
-        return $row;
+        $value = new Journal($row->id, $row->name, $row->date);
+        return $value;
     }
 
-    function save($journal)
+    function save(Journal $journal): void
     {
         $stmt = $this->test_conn->prepare("UPDATE journals SET name = :name, date = :date WHERE id = :id");
         $stmt->execute([':id' => $journal->id, ':name' => $journal->name, ':date' => $journal->date]);
     }
 
-    function delete($id)
+    function delete(int $id): void
     {
         $stmt = $this->test_conn->prepare("DELETE FROM journals WHERE id = :id");
         $stmt->execute([':id' => $id]);
