@@ -8,7 +8,7 @@ class Journal
     public $name;
     public $date;
 
-    public function __construct($id, $name, $date)
+    public function __construct(?int $id, $name, $date)
     {
         $this->id = $id;
         $this->name = $name;

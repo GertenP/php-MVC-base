@@ -54,7 +54,7 @@ class JournalController extends Controller
         $id = $_GET['id'];
         $journal = $this->_journalsService->get($id);
         $this->render('delete', ['journals' => $journal]);
-        }
+    }
 
 
     public function remove()
@@ -64,4 +64,12 @@ class JournalController extends Controller
         header('Location: /journals');
     }
 
+    public function create()
+    {
+        $name = $_POST['name'];
+        $date = $_POST['date'];
+        $journal = new Journal(null, $name, $date);  // ← id on null
+        $journal = $this->_journalsService->add($journal);
+        header('Location: /journals');
+    }
 }

@@ -31,7 +31,8 @@ class journalsRepository implements IJournalsRepository
 
     function add(Journal $journal): void
     {
-        $stmt = $this->test_conn->prepare("INSERT INTO journals (name, date) VALUES (':name', ':date')");
+        $stmt = $this->test_conn->prepare("INSERT INTO journals (name, date) VALUES (:name, :date)");
+        var_dump($journal);
         $stmt->execute([':name' => $journal->name, ':date' => $journal->date]);
     }
 
@@ -46,6 +47,7 @@ class journalsRepository implements IJournalsRepository
 
     function save(Journal $journal): void
     {
+        var_dump($journal);
         $stmt = $this->test_conn->prepare("UPDATE journals SET name = :name, date = :date WHERE id = :id");
         $stmt->execute([':id' => $journal->id, ':name' => $journal->name, ':date' => $journal->date]);
     }

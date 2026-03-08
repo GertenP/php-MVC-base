@@ -13,4 +13,6 @@ $router->post('/journals/edit', JournalController::class, 'update');
 $router->get('/journals/delete', JournalController::class, 'delete');
 $router->post('/journals/delete', JournalController::class, 'remove');
 
+$router->post('/journals/create', JournalController::class, 'create');
+
 $router->dispatch();
